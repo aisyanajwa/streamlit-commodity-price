@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-# import geopandas as gpd
+import geopandas as gpd
 import joblib
 import calendar
 from datetime import date
@@ -22,7 +22,7 @@ def load_model():
 # ===============================
 # Fungsi visualisasi peta dengan GeoPandas
 # ===============================
-# def visualisasi_peta(df_prediksi, commodity, tanggal, bulan, tahun):
+def visualisasi_peta(df_prediksi, commodity, tanggal, bulan, tahun):
     provinsi_mapping = {
         'DI Yogyakarta': 'Yogyakarta',
         'DKI Jakarta': 'JakartaRaya',
@@ -149,7 +149,7 @@ def main():
         df_prediksi = pd.DataFrame(data_prediksi)
         st.subheader(f"Peta Perbandingan Prediksi Harga Setiap Provinsi")
         st.markdown(f"<h5>{commodity} - {tanggal}/{bulan}/{tahun}", unsafe_allow_html=True)
-        # visualisasi_peta(df_prediksi, commodity, tanggal, bulan, tahun)
+        visualisasi_peta(df_prediksi, commodity, tanggal, bulan, tahun)
 
         with st.expander("📋 Lihat Ringkasan Prediksi Harian per Provinsi"):
             st.dataframe(df_prediksi.sort_values(by="Harga", ascending=False), use_container_width=True)
