@@ -101,11 +101,11 @@ class PricePredictionApp:
         st.line_chart(df_timeline.set_index('Tanggal'))
 
         st.write(f"Harga Tertinggi: Rp {harga_tertinggi:,.2f} pada {tanggal_tertinggi}/{bulan}/{tahun}")
-        st.write(f"Harga Terendah: Rp {harga_terendah:,.2f} pada {tanggal_terendah}/{tahun}")
+        st.write(f"Harga Terendah: Rp {harga_terendah:,.2f} pada {tanggal_terendah}/{bulan}/{tahun}")
 
         df_ringkas = pd.DataFrame({"Tanggal": tanggal_list, "Harga": [x[1] for x in harga_list]})
         with st.expander("📋 Lihat Ringkasan Prediksi Bulanan"):
-            st.dataframe(df_ringkas, use_container_width=True)
+            st.dataframe(df_ringkas, use_container_width=True, hide_index=True)
 
     @staticmethod
     def simpan_prediksi_ke_history(tanggal, bulan, tahun, selected_prov, commodity, harga_prediksi):
@@ -179,7 +179,7 @@ class PricePredictionApp:
             self.visualisasi_peta(df_prediksi, commodity, tanggal, bulan, tahun)
 
             with st.expander("📋 Lihat Ringkasan Prediksi Harian per Provinsi"):
-                st.dataframe(df_prediksi.sort_values(by="Harga", ascending=False), use_container_width=True)
+                st.dataframe(df_prediksi.sort_values(by="Harga", ascending=False), use_container_width=True, hide_index=True)
 
             st.subheader("Grafik Prediksi Harga (1 Bulan) ")
             st.markdown(f"<h5> {commodity} di {selected_prov} pada {calendar.month_name[bulan]} {tahun}", unsafe_allow_html=True)
@@ -188,7 +188,7 @@ class PricePredictionApp:
             if 'history' in st.session_state:
                 with st.expander("📜 Riwayat Prediksi Harga"):
                     history_df = pd.DataFrame(st.session_state.history)
-                    st.dataframe(history_df, use_container_width=True)
+                    st.dataframe(history_df, use_container_width=True, hide_index=True)
 
             st.markdown("""
 **Keterangan:**
