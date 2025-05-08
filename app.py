@@ -104,7 +104,7 @@ class PricePredictionApp:
         st.write(f"Harga Terendah: Rp {harga_terendah:,.2f} pada {tanggal_terendah}/{bulan}/{tahun}")
 
         df_ringkas = pd.DataFrame({"Tanggal": tanggal_list, "Harga": [x[1] for x in harga_list]})
-        with st.expander("📋 Lihat Ringkasan Prediksi Bulanan"):
+        with st.expander(f"📋 Lihat Ringkasan Prediksi Bulanan pada {bulan}/{tahun}"):
             st.dataframe(df_ringkas, use_container_width=True, hide_index=True)
 
     @staticmethod
