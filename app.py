@@ -15,6 +15,12 @@ class PricePredictionApp:
     @staticmethod
     @st.cache_data
     def load_model():
+        """
+        Memuat model Decision Tree serta file encoding provinsi dan komoditas.
+            - model: Model DecisionTreeRegressor
+            - prov_map: Mapping nama provinsi
+            - com_map: Mapping nama komoditas
+        """
         model = joblib.load("trained_decision_tree_model.pkl")
         df = pd.read_csv("harga_pangan_encoded.csv")
 
@@ -25,6 +31,16 @@ class PricePredictionApp:
 
     @staticmethod
     def visualisasi_peta(df_prediksi, commodity, tanggal, bulan, tahun):
+        """
+        Menampilkan peta Plotly harga pangan berdasarkan prediksi.
+
+            df_prediksi (DataFrame): DataFrame hasil prediksi
+            commodity (str): Nama komoditas
+            tanggal (int): Tanggal prediksi
+            bulan (int): Bulan prediksi
+            tahun (int): Tahun prediksi
+        """
+        
         with open("gadm41_IDN_1.json", "r", encoding="utf-8") as f:
             geojson = json.load(f)
 
@@ -73,6 +89,17 @@ class PricePredictionApp:
 
     @staticmethod
     def grafik_timeline(model, prov_map, com_map, selected_prov, commodity, tahun, bulan):
+        """
+        Menampilkan grafik garis harga pangan selama satu bulan penuh.
+
+            prov_map: Mapping nama provinsi
+            com_map: Mapping nama komoditas
+            selected_prov (str): Provinsi yang dipilih
+            commodity (str): Komoditas yang dipilih
+            tahun (int): Tahun
+            bulan (int): Bulan
+        """
+        
         hari_terakhir = calendar.monthrange(tahun, bulan)[1]
         tanggal_list = list(range(1, hari_terakhir + 1))
 
@@ -109,6 +136,16 @@ class PricePredictionApp:
 
     @staticmethod
     def simpan_prediksi_ke_history(tanggal, bulan, tahun, selected_prov, commodity, harga_prediksi):
+        """
+        Menyimpan hasil prediksi ke dalam session_state sebagai riwayat.
+
+            tanggal (int): Tanggal prediksi
+            bulan (int): Bulan prediksi
+            tahun (int): Tahun prediksi
+            selected_prov (str): Provinsi yang dipilih
+            commodity (str): Komoditas
+            harga_prediksi (float): Nilai harga hasil prediksi
+        """
         if 'history' not in st.session_state:
             st.session_state.history = []
         
@@ -123,6 +160,10 @@ class PricePredictionApp:
         st.session_state.history.append(prediksi_baru)
 
     def run(self):
+        """
+        Fungsi utama aplikasi untuk menampilkan UI, input, dan hasil prediksi.
+        Menyusun seluruh komponen antarmuka Streamlit.
+        """
         st.title("Prediksi Harga Pangan per Provinsi di Indonesia")
 
         provinsi_list = list(self.prov_map.keys())
