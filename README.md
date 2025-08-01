@@ -1,4 +1,4 @@
-# Prediksi Harga Pangan Indonesia
+# Prediksi Harga Pangan Indonesia 
 
 Aplikasi web ini dirancang untuk memprediksi harga pangan di Indonesia dengan memanfaatkan model machine learning Decision Tree Regressor. Tujuan utama pengembangan aplikasi ini adalah untuk memberikan informasi prediktif yang dapat membantu pengguna dalam mengambil keputusan berdasarkan data harga pangan. Model ini memiliki performa sangat baik dengan RMSE sebesar 1.649,44, MAE 579,07, nilai R² 0,9976, dan MAPE 1,38%, yang menunjukkan akurasi tinggi dan kesalahan prediksi rendah. Hasil prediksi ditampilkan dalam bentuk grafik dan peta interaktif berbasis web menggunakan Streamlit. Kombinasi akurasi dan kecepatan eksekusi membuat Decision Tree menjadi pilihan optimal untuk analisis harga pangan.
 
